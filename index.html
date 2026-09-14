@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#5a1020" />
+  <title>Shatakshi & Nikhil | Our Celebration</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { colors: { pine: '#5a1020', moss: '#84233a', parchment: '#fff8e9', clay: '#c55230', blush: '#f1d7ba', gold: '#c99b3b' }, fontFamily: { display: ['Cormorant Garamond', 'serif'], body: ['Manrope', 'sans-serif'] } } }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #fff8e9; color: #5a1020; overflow-x: hidden; }
+    .grain { position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: .05; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E"); }
+    .hero-overlay { background: linear-gradient(180deg, rgba(74,8,24,.20), rgba(74,8,24,.83)); }
+    .line-art { background-image: radial-gradient(circle at 10% 20%, rgba(213,173,98,.2) 0 1px, transparent 1.5px), radial-gradient(circle at 80% 75%, rgba(213,173,98,.19) 0 1px, transparent 1.5px); background-size: 26px 26px, 33px 33px; }
+    .flower { filter: drop-shadow(0 10px 15px rgba(0,0,0,.15)); }
+    .music-disc { background: repeating-radial-gradient(circle at 50% 50%, #84233a 0 2px, #5a1020 3px 5px); }
+    .music-disc::after { content:''; position:absolute; inset:45%; border-radius:50%; background:#c99b3b; border:2px solid #fff8e9; }
+    .card-cut { clip-path: polygon(0 0, 100% 0, 100% 96%, 94% 100%, 0 100%); }
+    .mandala { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23c99b3b' stroke-width='1'%3E%3Ccircle cx='120' cy='120' r='84'/%3E%3Ccircle cx='120' cy='120' r='50'/%3E%3Cpath d='M120 4v232M4 120h232M38 38l164 164M202 38L38 202'/%3E%3Cpath d='M120 36c25 35 25 133 0 168C95 169 95 71 120 36ZM36 120c35-25 133-25 168 0-35 25-133 25-168 0Z'/%3E%3C/g%3E%3C/svg%3E"); background-size:280px; background-repeat:no-repeat; }
+    #opening { transition: opacity .8s ease, visibility .8s ease; }
+    #opening.closed { opacity:0; visibility:hidden; }
+  </style>
+</head>
+<body class="font-body antialiased">
+  <div class="grain"></div>
+
+  <!-- Optional: add your own song at assets/soothing-instrumental.mp3. A built-in ambient instrumental plays if no file is added. -->
+  <audio id="weddingMusic" loop preload="none"><source src="assets/soothing-instrumental.mp3" type="audio/mpeg" /></audio>
+
+  <!-- Opening screen: the first guest interaction safely starts music. -->
+  <div id="opening" class="fixed inset-0 z-40 grid place-items-center bg-pine p-6 text-center text-parchment">
+    <div class="absolute inset-0 opacity-20 bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=1400&q=85')"></div>
+    <div class="relative max-w-sm">
+      <p class="mb-5 text-[10px] font-bold uppercase tracking-[.38em] text-gold">शुभ विवाह</p>
+      <div class="mx-auto mb-7 h-16 w-16 rounded-full border border-gold/60 grid place-items-center"><span class="font-display text-3xl italic text-gold">S&N</span></div>
+      <h1 class="font-display text-5xl leading-[.8] sm:text-6xl">Shatakshi <span class="italic text-gold">&</span> Nikhil</h1>
+      <p class="mt-8 text-sm leading-7 text-parchment/80">With joyful hearts, we invite you to celebrate the start of our beautiful new chapter.</p>
+      <button id="openInvite" class="mt-10 rounded-full border border-gold bg-gold px-7 py-4 text-[10px] font-bold uppercase tracking-[.24em] text-pine transition hover:bg-transparent hover:text-gold focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-pine">Tap to open</button>
+    </div>
+  </div>
+
+  <main>
+    <section class="relative min-h-screen overflow-hidden bg-pine text-parchment">
+      <!-- Replace this Unsplash URL with a couple photo if desired. -->
+      <div class="absolute inset-0 bg-cover bg-center animate-[pulse_8s_ease-in-out_infinite]" style="background-image:url('https://images.unsplash.com/photo-1604604561450-59488b35031b?auto=format&fit=crop&w=1800&q=85')"></div>
+      <div class="hero-overlay absolute inset-0"></div>
+      <div class="line-art absolute inset-0"></div><div class="mandala absolute -right-28 top-14 h-72 w-72 opacity-50"></div><div class="mandala absolute -bottom-32 -left-24 h-80 w-80 opacity-40"></div>
+        <div class="relative flex min-h-screen flex-col justify-between px-6 py-8 sm:px-10">
+          <div class="flex items-center justify-between text-[9px] font-bold uppercase tracking-[.28em]"><span>Save the date</span><span>2026</span></div>
+          <div class="pb-10 text-center">
+          <div class="reveal mx-auto mb-11 flex w-28 items-center justify-center">
+            <span class="h-10 w-10 rounded-full border border-gold/80"></span><span class="-ml-3 h-10 w-10 rounded-full border border-gold/80"></span>
+          </div>
+          <p class="reveal mb-6 text-[10px] font-bold uppercase tracking-[.4em] text-gold">Together with our families</p>
+          <h2 class="reveal font-display text-[clamp(4.5rem,20vw,9rem)] leading-[.58] tracking-tight">Shatakshi<br><span class="ml-5 italic text-gold">&</span> Nikhil</h2>
+          <div class="reveal mx-auto mt-12 max-w-xs border-t border-gold/60 pt-5"><p class="font-display text-xl italic">are getting married</p><p class="mt-2 text-[10px] font-bold uppercase tracking-[.28em] text-parchment/80">30 November · 2026</p></div>
+        </div>
+        <a href="#celebrations" class="mx-auto flex flex-col items-center gap-2 text-[9px] font-bold uppercase tracking-[.25em] text-parchment/80"><span>Discover</span><span class="h-10 w-px bg-gold"></span></a>
+      </div>
+    </section>
+
+    <section id="celebrations" class="relative px-5 py-20 sm:px-10 lg:px-20">
+      <div class="mx-auto max-w-5xl text-center">
+        <p class="reveal text-[10px] font-bold uppercase tracking-[.35em] text-clay">Mark your calendar</p>
+        <h2 class="reveal mt-3 font-display text-5xl leading-none sm:text-6xl">Two beautiful beginnings</h2>
+        <p class="reveal mx-auto mt-5 max-w-md text-sm leading-7 text-pine/70">Two moments, one story. We would be honoured to have you beside us for both.</p>
+      </div>
+      <div class="mx-auto mt-12 grid max-w-4xl gap-5 md:grid-cols-2">
+        <!-- Edit names, time, and venue details below. -->
+        <article class="reveal card-cut border border-pine/10 bg-white p-7 shadow-[0_18px_45px_rgba(23,63,56,.08)] sm:p-9">
+          <div class="flex items-start justify-between"><p class="text-[10px] font-bold uppercase tracking-[.3em] text-clay">First chapter</p><span class="font-display text-3xl italic text-gold">I</span></div>
+          <h3 class="mt-10 font-display text-4xl">Ring Ceremony</h3>
+          <p class="mt-1 text-[11px] font-bold uppercase tracking-[.18em] text-moss">Saturday · 24 October 2026</p>
+          <div class="my-7 h-px w-12 bg-gold"></div>
+          <p class="text-sm leading-7 text-pine/75"><span class="font-semibold text-pine">06:30 PM</span><br><span class="mt-2 block text-[10px] font-bold uppercase tracking-[.2em] text-clay">Venue</span><span class="font-semibold text-pine">Grand Utsav Banquet</span><br>Kharghar, Navi Mumbai</p>
+          <a class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-gold/70 px-4 text-[10px] font-bold uppercase tracking-[.16em] text-pine transition hover:bg-gold/20 focus:outline-none focus:ring-2 focus:ring-gold" href="https://maps.app.goo.gl/Krps9WwA9Ln3VPSm6" target="_blank" rel="noreferrer" aria-label="Get directions to Grand Utsav Banquet"><span class="text-base leading-none">⌖</span> Get directions</a>
+          <a class="mt-6 inline-block text-[10px] font-bold uppercase tracking-[.2em] underline decoration-gold underline-offset-4" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Shatakshi+%26+Nikhil%27s+Engagement&dates=20261024T130000Z/20261024T160000Z" target="_blank" rel="noreferrer">Add to calendar</a>
+        </article>
+        <article class="reveal card-cut bg-pine p-7 text-parchment shadow-[0_18px_45px_rgba(23,63,56,.18)] sm:p-9">
+          <div class="flex items-start justify-between"><p class="text-[10px] font-bold uppercase tracking-[.3em] text-gold">The celebration</p><span class="font-display text-3xl italic text-gold">II</span></div>
+          <h3 class="mt-10 font-display text-4xl">Wedding Ceremony</h3>
+          <p class="mt-1 text-[11px] font-bold uppercase tracking-[.18em] text-blush">Monday · 30 November 2026</p>
+          <div class="my-7 h-px w-12 bg-gold"></div>
+          <p class="text-sm leading-7 text-parchment/80"><span class="font-semibold text-parchment">07:00 PM</span><br><span class="mt-2 block text-[10px] font-bold uppercase tracking-[.2em] text-gold">Venue</span><span class="font-semibold text-parchment">Hollywood Dreams</span><br>Vaishali, Ghaziabad</p>
+          <a class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-gold/70 px-4 text-[10px] font-bold uppercase tracking-[.16em] text-parchment transition hover:bg-gold/20 focus:outline-none focus:ring-2 focus:ring-gold" href="https://maps.app.goo.gl/BdjKHbQXGP9BvMCa7" target="_blank" rel="noreferrer" aria-label="Get directions to Hollywood Dreams"><span class="text-base leading-none">⌖</span> Get directions</a>
+          <a class="mt-6 inline-block text-[10px] font-bold uppercase tracking-[.2em] underline decoration-gold underline-offset-4" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Shatakshi+%26+Nikhil%27s+Wedding&dates=20261130T133000Z/20261130T173000Z" target="_blank" rel="noreferrer">Add to calendar</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="relative overflow-hidden bg-[#e9cfc4] px-6 py-24 text-center sm:px-10">
+      <div class="absolute -left-16 -top-12 h-52 w-52 rounded-full border-[24px] border-parchment/40"></div><div class="absolute -bottom-20 -right-10 h-64 w-64 rounded-full border-[28px] border-parchment/40"></div>
+      <div class="reveal relative mx-auto max-w-xl"><span class="font-display text-7xl leading-none text-clay">“</span><blockquote class="font-display text-3xl leading-tight text-pine sm:text-4xl">Love is not just looking at each other. It is looking in the same direction.</blockquote><p class="mt-6 text-[10px] font-bold uppercase tracking-[.25em] text-pine/65">— Antoine de Saint-Exupéry</p></div>
+    </section>
+
+    <section class="relative overflow-hidden bg-pine px-6 py-20 text-parchment sm:px-10">
+      <div class="absolute inset-0 opacity-20" style="background:radial-gradient(circle at 15% 25%, #d5ad62 0 1px, transparent 1.5px),radial-gradient(circle at 74% 20%, #d5ad62 0 1px, transparent 1.5px),radial-gradient(circle at 85% 70%, #d5ad62 0 1px, transparent 1.5px);background-size:80px 80px,115px 115px,95px 95px"></div>
+      <div class="reveal relative mx-auto max-w-2xl text-center">
+        <p class="text-[10px] font-bold uppercase tracking-[.35em] text-gold">The stars aligned</p>
+        <h2 class="mt-3 font-display text-5xl leading-none sm:text-6xl">One promise,<br><span class="italic text-gold">a lifetime</span> of stories.</h2>
+        <div class="mx-auto mt-10 flex max-w-md items-center justify-between gap-3 text-center">
+          <div><p class="font-display text-4xl text-gold">24</p><p class="mt-1 text-[9px] font-bold uppercase tracking-[.2em] text-parchment/65">October</p></div>
+          <div class="h-px flex-1 bg-gold/50"></div>
+          <div class="h-3 w-3 rotate-45 border border-gold"></div>
+          <div class="h-px flex-1 bg-gold/50"></div>
+          <div><p class="font-display text-4xl text-gold">30</p><p class="mt-1 text-[9px] font-bold uppercase tracking-[.2em] text-parchment/65">November</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rsvp" class="bg-parchment px-6 py-20 text-center sm:px-10">
+      <div class="reveal mx-auto max-w-lg">
+        <p class="text-[10px] font-bold uppercase tracking-[.35em] text-clay">Kindly respond by 1 November</p>
+        <h2 class="mt-3 font-display text-5xl leading-none sm:text-6xl">Will you join us?</h2>
+        <p class="mx-auto mt-5 max-w-sm text-sm leading-7 text-pine/70">Your presence will make our celebration complete. Please let us know if you can be there.</p>
+        <!-- Change the phone number and prefilled message to your own RSVP contact. -->
+        <a class="mt-9 inline-flex min-h-14 items-center justify-center rounded-full bg-pine px-7 text-[10px] font-bold uppercase tracking-[.2em] text-parchment transition hover:bg-moss focus:outline-none focus:ring-2 focus:ring-pine focus:ring-offset-4" href="https://wa.me/917045345242?text=Hello%20Shatakshi%20and%20Nikhil%2C%20I%20would%20love%20to%20attend%20your%20celebration!" target="_blank" rel="noreferrer">RSVP on WhatsApp</a>
+        <p class="mt-5 text-xs text-pine/55">or <a href="mailto:hello@example.com?subject=RSVP%20for%20Shatakshi%20%26%20Nikhil" class="underline underline-offset-4">email your RSVP</a></p>
+      </div>
+    </section>
+  </main>
+
+  <button id="musicToggle" aria-label="Play background music" class="fixed bottom-5 right-5 z-30 grid h-14 w-14 place-items-center rounded-full bg-gold shadow-lg transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pine focus:ring-offset-4">
+    <span id="musicIcon" class="relative music-disc h-7 w-7 rounded-full"></span>
+  </button>
+  <footer class="bg-pine px-6 py-10 text-center text-parchment"><p class="font-display text-3xl italic text-gold">Shatakshi & Nikhil</p><p class="mt-3 text-[9px] font-bold uppercase tracking-[.3em] text-parchment/60">With love · 2026</p></footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    const music = document.getElementById('weddingMusic');
+    const toggle = document.getElementById('musicToggle');
+    const icon = document.getElementById('musicIcon');
+    let audioContext, ambientTimer, usingFile = false;
+    // A soft, slow harp-like arpeggio: no external download required.
+    function startBuiltInMusic() {
+      if (ambientTimer) return;
+      audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+      audioContext.resume();
+      const notes = [261.63, 329.63, 392, 493.88, 587.33, 493.88, 392, 329.63];
+      let step = 0;
+      const playNote = () => {
+        const now = audioContext.currentTime;
+        const osc = audioContext.createOscillator(), gain = audioContext.createGain();
+        osc.type = 'sine'; osc.frequency.setValueAtTime(notes[step++ % notes.length], now);
+        gain.gain.setValueAtTime(.0001, now); gain.gain.exponentialRampToValueAtTime(.075, now + .04);
+        gain.gain.exponentialRampToValueAtTime(.0001, now + 1.55);
+        osc.connect(gain).connect(audioContext.destination); osc.start(now); osc.stop(now + 1.6);
+      };
+      playNote(); ambientTimer = setInterval(playNote, 820);
+    }
+    function stopBuiltInMusic() { if (ambientTimer) { clearInterval(ambientTimer); ambientTimer = null; } }
+    const setMusic = async () => {
+      try { await music.play(); usingFile = true; }
+      catch (e) { usingFile = false; startBuiltInMusic(); }
+      icon.classList.add('animate-[spin_4s_linear_infinite]'); toggle.setAttribute('aria-label', 'Pause background music');
+    };
+    document.getElementById('openInvite').addEventListener('click', () => { document.getElementById('opening').classList.add('closed'); setMusic(); });
+    toggle.addEventListener('click', () => { if (music.paused && !ambientTimer) setMusic(); else { music.pause(); stopBuiltInMusic(); icon.classList.remove('animate-[spin_4s_linear_infinite]'); toggle.setAttribute('aria-label', 'Play background music'); } });
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('.reveal').forEach((el) => gsap.from(el, { y: 28, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } }));
+  </script>
+</body>
+</html>
