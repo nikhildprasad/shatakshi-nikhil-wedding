@@ -25,12 +25,20 @@
     .music-disc::after { content:''; position:absolute; inset:45%; border-radius:50%; background:#c99b3b; border:2px solid #fff8e9; }
     .card-cut { clip-path: polygon(0 0, 100% 0, 100% 96%, 94% 100%, 0 100%); }
     .mandala { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23c99b3b' stroke-width='1'%3E%3Ccircle cx='120' cy='120' r='84'/%3E%3Ccircle cx='120' cy='120' r='50'/%3E%3Cpath d='M120 4v232M4 120h232M38 38l164 164M202 38L38 202'/%3E%3Cpath d='M120 36c25 35 25 133 0 168C95 169 95 71 120 36ZM36 120c35-25 133-25 168 0-35 25-133 25-168 0Z'/%3E%3C/g%3E%3C/svg%3E"); background-size:280px; background-repeat:no-repeat; }
+    .flower-shower { position: fixed; inset: 0; z-index: 20; overflow: hidden; pointer-events: none; }
+    .flower-shower span { position: absolute; top: -12vh; color: #e88b39; font-family: Georgia, serif; font-size: var(--size); line-height: 1; opacity: 0; filter: drop-shadow(0 3px 4px rgba(90,16,32,.17)); animation: flower-fall var(--duration) linear var(--delay) infinite; }
+    @keyframes flower-fall { 0% { transform: translate3d(0, -10vh, 0) rotate(0deg); opacity: 0; } 8% { opacity: .72; } 50% { transform: translate3d(var(--drift), 54vh, 0) rotate(230deg); } 92% { opacity: .5; } 100% { transform: translate3d(calc(var(--drift) * -0.4), 116vh, 0) rotate(480deg); opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .flower-shower { display: none; } }
     #opening { transition: opacity .8s ease, visibility .8s ease; }
     #opening.closed { opacity:0; visibility:hidden; }
   </style>
 </head>
 <body class="font-body antialiased">
   <div class="grain"></div>
+  <!-- Gentle marigold petals for a celebratory Indian wedding atmosphere. -->
+  <div class="flower-shower" aria-hidden="true">
+    <span style="left:4%;--size:1.35rem;--duration:12s;--delay:-7s;--drift:7vw">✿</span><span style="left:13%;--size:.9rem;--duration:16s;--delay:-2s;--drift:-9vw">✾</span><span style="left:22%;--size:1.15rem;--duration:14s;--delay:-10s;--drift:11vw">✿</span><span style="left:31%;--size:.8rem;--duration:18s;--delay:-14s;--drift:-6vw">✾</span><span style="left:40%;--size:1.25rem;--duration:13s;--delay:-4s;--drift:8vw">✿</span><span style="left:51%;--size:.9rem;--duration:17s;--delay:-12s;--drift:-10vw">✾</span><span style="left:62%;--size:1.35rem;--duration:15s;--delay:-8s;--drift:6vw">✿</span><span style="left:71%;--size:.8rem;--duration:19s;--delay:-16s;--drift:-8vw">✾</span><span style="left:81%;--size:1.2rem;--duration:14s;--delay:-5s;--drift:9vw">✿</span><span style="left:91%;--size:1rem;--duration:16s;--delay:-11s;--drift:-7vw">✾</span>
+  </div>
 
   <!-- Optional: add your own song at assets/soothing-instrumental.mp3. A built-in ambient instrumental plays if no file is added. -->
   <audio id="weddingMusic" loop preload="none"><source src="assets/soothing-instrumental.mp3" type="audio/mpeg" /></audio>
