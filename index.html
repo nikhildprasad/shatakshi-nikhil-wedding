@@ -21,8 +21,6 @@
     .hero-overlay { background: linear-gradient(180deg, rgba(74,8,24,.20), rgba(74,8,24,.83)); }
     .line-art { background-image: radial-gradient(circle at 10% 20%, rgba(213,173,98,.2) 0 1px, transparent 1.5px), radial-gradient(circle at 80% 75%, rgba(213,173,98,.19) 0 1px, transparent 1.5px); background-size: 26px 26px, 33px 33px; }
     .flower { filter: drop-shadow(0 10px 15px rgba(0,0,0,.15)); }
-    .music-disc { background: repeating-radial-gradient(circle at 50% 50%, #84233a 0 2px, #5a1020 3px 5px); }
-    .music-disc::after { content:''; position:absolute; inset:45%; border-radius:50%; background:#c99b3b; border:2px solid #fff8e9; }
     .card-cut { clip-path: polygon(0 0, 100% 0, 100% 96%, 94% 100%, 0 100%); }
     .mandala { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23c99b3b' stroke-width='1'%3E%3Ccircle cx='120' cy='120' r='84'/%3E%3Ccircle cx='120' cy='120' r='50'/%3E%3Cpath d='M120 4v232M4 120h232M38 38l164 164M202 38L38 202'/%3E%3Cpath d='M120 36c25 35 25 133 0 168C95 169 95 71 120 36ZM36 120c35-25 133-25 168 0-35 25-133 25-168 0Z'/%3E%3C/g%3E%3C/svg%3E"); background-size:280px; background-repeat:no-repeat; }
     .flower-shower { position: fixed; inset: 0; z-index: 20; overflow: hidden; pointer-events: none; }
@@ -62,7 +60,7 @@
       <div class="hero-overlay absolute inset-0"></div>
       <div class="line-art absolute inset-0"></div><div class="mandala absolute -right-28 top-14 h-72 w-72 opacity-50"></div><div class="mandala absolute -bottom-32 -left-24 h-80 w-80 opacity-40"></div>
         <div class="relative flex min-h-screen flex-col justify-between px-6 py-8 sm:px-10">
-          <div class="flex items-center justify-between text-[9px] font-bold uppercase tracking-[.28em]"><span>Save the date</span><button id="musicToggle" aria-label="Play background music" class="fixed right-4 top-4 z-30 inline-flex min-h-11 items-center gap-2 rounded-full border border-gold/70 bg-pine/85 px-4 text-[10px] font-bold uppercase tracking-[.14em] text-parchment shadow-lg backdrop-blur-sm transition hover:bg-moss focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-pine"><span id="musicIcon" class="text-base leading-none" aria-hidden="true">▶</span><span id="musicLabel">Play music</span></button></div>
+          <div class="flex items-center justify-between text-[9px] font-bold uppercase tracking-[.28em]"><span>Save the date</span><button id="musicToggle" aria-label="Play background music" class="fixed right-4 top-4 z-30 inline-flex min-h-11 items-center gap-2 border border-gold/80 bg-pine px-4 text-[10px] font-bold uppercase tracking-[.14em] text-parchment shadow-lg transition hover:bg-moss focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-pine"><span id="musicIcon" class="text-base leading-none" aria-hidden="true">▶</span><span id="musicLabel">Play music</span></button></div>
           <div class="pb-10 text-center">
           <div class="reveal mx-auto mb-11 flex w-28 items-center justify-center">
             <span class="h-10 w-10 rounded-full border border-gold/80"></span><span class="-ml-3 h-10 w-10 rounded-full border border-gold/80"></span>
@@ -142,7 +140,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script>
     const music = document.getElementById('weddingMusic');
-    music.volume = 0.4;
+    music.volume = 0.1;
     const toggle = document.getElementById('musicToggle');
     const icon = document.getElementById('musicIcon');
     let audioContext, ambientTimer, usingFile = false;
@@ -157,7 +155,7 @@
         const now = audioContext.currentTime;
         const osc = audioContext.createOscillator(), gain = audioContext.createGain();
         osc.type = 'sine'; osc.frequency.setValueAtTime(notes[step++ % notes.length], now);
-        gain.gain.setValueAtTime(.0001, now); gain.gain.exponentialRampToValueAtTime(.03, now + .04);
+        gain.gain.setValueAtTime(.0001, now); gain.gain.exponentialRampToValueAtTime(.0075, now + .04);
         gain.gain.exponentialRampToValueAtTime(.0001, now + 1.55);
         osc.connect(gain).connect(audioContext.destination); osc.start(now); osc.stop(now + 1.6);
       };
@@ -165,7 +163,7 @@
     }
     function stopBuiltInMusic() { if (ambientTimer) { clearInterval(ambientTimer); ambientTimer = null; } }
     const setMusic = async () => {
-      try { music.volume = .4; await music.play(); usingFile = true; }
+      try { music.volume = .1; await music.play(); usingFile = true; }
       catch (e) { usingFile = false; startBuiltInMusic(); }
       icon.textContent = '❚❚'; document.getElementById('musicLabel').textContent = 'Pause music'; toggle.setAttribute('aria-label', 'Pause background music');
     };
