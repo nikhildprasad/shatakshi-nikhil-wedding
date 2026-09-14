@@ -60,7 +60,7 @@
       <div class="hero-overlay absolute inset-0"></div>
       <div class="line-art absolute inset-0"></div><div class="mandala absolute -right-28 top-14 h-72 w-72 opacity-50"></div><div class="mandala absolute -bottom-32 -left-24 h-80 w-80 opacity-40"></div>
         <div class="relative flex min-h-screen flex-col justify-between px-6 py-8 sm:px-10">
-          <div class="flex items-center justify-between text-[9px] font-bold uppercase tracking-[.28em]"><span>Save the date</span><button id="musicToggle" aria-label="Play background music" class="fixed right-4 top-4 z-30 inline-flex min-h-11 items-center gap-2 border border-gold/80 bg-pine px-4 text-[10px] font-bold uppercase tracking-[.14em] text-parchment shadow-lg transition hover:bg-moss focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-pine"><span id="musicIcon" class="text-base leading-none" aria-hidden="true">▶</span><span id="musicLabel">Play music</span></button></div>
+          <div class="flex items-center justify-between text-[9px] font-bold uppercase tracking-[.28em]"><span>Save the date</span><button id="musicToggle" aria-label="Play background music" class="fixed right-4 top-4 z-30 inline-flex min-h-11 items-center gap-2 rounded-xl border border-gold/80 bg-pine px-4 text-[10px] font-bold uppercase tracking-[.14em] text-parchment shadow-lg transition hover:bg-moss focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2 focus:ring-offset-pine"><span id="musicIcon" class="text-base leading-none" aria-hidden="true">▶</span><span id="musicLabel">Play music</span></button></div>
           <div class="pb-10 text-center">
           <div class="reveal mx-auto mb-11 flex w-28 items-center justify-center">
             <span class="h-10 w-10 rounded-full border border-gold/80"></span><span class="-ml-3 h-10 w-10 rounded-full border border-gold/80"></span>
@@ -140,7 +140,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script>
     const music = document.getElementById('weddingMusic');
-    const musicVolume = 0.3;
+    const musicVolume = 0.2;
     music.volume = musicVolume;
     music.addEventListener('loadedmetadata', () => { music.volume = musicVolume; });
     music.addEventListener('play', () => { music.volume = musicVolume; });
@@ -158,7 +158,7 @@
         const now = audioContext.currentTime;
         const osc = audioContext.createOscillator(), gain = audioContext.createGain();
         osc.type = 'sine'; osc.frequency.setValueAtTime(notes[step++ % notes.length], now);
-        gain.gain.setValueAtTime(.0001, now); gain.gain.exponentialRampToValueAtTime(.0225, now + .04);
+        gain.gain.setValueAtTime(.0001, now); gain.gain.exponentialRampToValueAtTime(.015, now + .04);
         gain.gain.exponentialRampToValueAtTime(.0001, now + 1.55);
         osc.connect(gain).connect(audioContext.destination); osc.start(now); osc.stop(now + 1.6);
       };
